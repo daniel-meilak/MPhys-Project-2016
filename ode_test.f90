@@ -8,7 +8,7 @@ contains
   
   function f(x,w)
     !========================================================================!
-    ! This suroutine is an analytically solvable ode that can be used as a   !
+    ! This subroutine is an analytically solvable ode that can be used as a   !
     ! test. (It is the most basic case of the simple harmonic oscillator)    !
     !========================================================================!
     implicit none
