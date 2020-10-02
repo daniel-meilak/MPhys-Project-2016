@@ -3,7 +3,7 @@ To compile:
    For TEST run:
        -Compile ode_test.f90 (module)
 
-       -In runge_kutta.f90 chage third line to "use ode_test"
+       -In runge_kutta.f90 change third line to "use ode_test"
        Comment out lines 79 & 81  ("call read_pot" and "call find_coeff")
        
        -Compile runge_kutta.f90 with ode_test.o
