@@ -1,3 +1,5 @@
+MPhys project on Schottky Barriers, completed in 2016 at the University of York. 
+
 To compile:
 
    For TEST run:

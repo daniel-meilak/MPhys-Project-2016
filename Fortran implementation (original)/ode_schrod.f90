@@ -17,8 +17,7 @@ contains
   subroutine read_pot
     !======================================================================!
     ! Reads the form and dimentions of the given potential from a file,    !
-    ! input.dat (This will already have been opened previously in a        !
-    ! different subroutine)                                                !
+    ! input2.dat                                          !
     !----------------------------------------------------------------------!
     ! This subroutine need to be called before using the Runge Kutta       !
     ! method, if the ode is giong to be the shrodinger equation            !
@@ -71,7 +70,7 @@ contains
     complex(kind=dp), dimension(2)             :: f
     
     f(1) = w(2)
-    f(2) = 2*(V(x)-E)*w(1)
+    f(2) = 2.0_dp*(V(x)-E)*w(1)
     
     return
   end function f

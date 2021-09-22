@@ -13,7 +13,7 @@ contains
     !---------------------------------------------------------------------------!
     ! Input:                                                                    !
     !                                                                           !
-    !  a,b : start and end points of the system                                 !
+    !  start, finish : start and end points of the system                                 !
     !  n   : number of iterations (also defines step size through h)            !
     !---------------------------------------------------------------------------!
     ! Requires:                                                                 !
