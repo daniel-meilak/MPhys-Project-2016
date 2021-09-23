@@ -26,7 +26,7 @@ contains
     
     integer :: ierr
     
-    open(10,file='input2.dat',status='old',iostat=ierr)
+    open(10,file='../input2.dat',status='old',iostat=ierr)
     if (ierr/=0) stop "Error in opening input.dat"
     read(10,*) pot_form
     if (pot_form=='triangle') then

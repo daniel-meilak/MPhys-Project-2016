@@ -5,6 +5,7 @@
 #include<cmath>
 #include<complex>
 #include<cstdlib>
+#include<iomanip>
 #include<iostream>
 #include<fstream>
 #include<ranges>
@@ -15,7 +16,7 @@
 #include"ode_shrod.h"
 
 // globals (fallback from Fortran)
-extern double energy, height;
+extern long double energy, height;
 
 //===========================================================================
 // This is an algorithm for the fourth order Runge Kutta method. It is a 4th 
@@ -29,14 +30,14 @@ extern double energy, height;
 void runge_kutta(){
 
    // future note: constexpr when g++ implements C++20 fully
-   const std::string input_file  = "input1.dat";
+   const std::string input_file  = "../input1.dat";
    const std::string output_file = "output.dat";
    
    // parameters
    int n_iter;
-   double x, height, start, finish;
-   std::complex<double> wave_n;
-   complex_2D<double> psi, k1, k2, k3, k4; 
+   long double x, step_size, start, finish;
+   std::complex<long double> wave_n;
+   complex_2D<long double> psi, k1, k2, k3, k4; 
 
    // read input parameters
    std::ifstream input(input_file);
@@ -45,14 +46,15 @@ void runge_kutta(){
       std::exit(EXIT_FAILURE);
    }
    input >> start >> finish;
+   input.ignore(1000,'\n');
    input >> n_iter;
    input.close();
 
    // calculate starting psi and psi'
-   wave_n     = std::complex<double>(0.0,std::sqrt(2.0*energy));
+   wave_n     = std::complex<long double>(0.0l,std::sqrt(2.0l*energy));
    psi.first  = std::exp(wave_n*finish);
    psi.second = psi.first*wave_n;
-   height     = finish-start/n_iter;
+   step_size  = (finish-start)/n_iter;
    x          = finish;
 
    // start writing output data (overwrite old output)
@@ -61,22 +63,22 @@ void runge_kutta(){
       std::cerr << "Error in opening " << output_file << std::endl;
       std::exit(EXIT_FAILURE);
    }
-   output << x << "\t" << psi.first.real() << "\t" << psi.first.imag() << "\t"
-          << psi.second.real() << "\t" << psi.second.imag() << "\n";
+   output << std::setprecision(15) << x << "\t" << psi.first.real() << "\t" << psi.first.imag()
+          << "\t" << psi.second.real() << "\t" << psi.second.imag() << "\n";
 
    for (int i=1; i<=n_iter; i++){
 
       // 4 function calls, each depends on the preceding one
-      k1 = height*schrod(x           , psi       );
-      k2 = height*schrod(x-height/2.0, psi-k1/2.0);
-      k3 = height*schrod(x-height/2.0, psi-k2/2.0);
-      k4 = height*schrod(x-height    , psi-k3    );
+      k1 = step_size*schrod(x           , psi       );
+      k2 = step_size*schrod(x-height/2.0l, psi-k1/2.0l);
+      k3 = step_size*schrod(x-height/2.0l, psi-k2/2.0l);
+      k4 = step_size*schrod(x-height    , psi-k3    );
 
-      psi -= (k1 + 2.0*k2 + 2.0*k3 + k4)/6.0;
-      x    = x - height;
+      psi -= (k1 + 2.0l*k2 + 2.0l*k3 + k4)/6.0l;
+      x   -= step_size;
 
-      output << x << "\t" << psi.first.real() << "\t" << psi.first.imag() << "\t"
-          << psi.second.real() << "\t" << psi.second.imag() << "\n";
+      output << std::setprecision(15) << x << "\t" << psi.first.real() << "\t" << psi.first.imag()
+             << "\t" << psi.second.real() << "\t" << psi.second.imag() << "\n";
    }
 
    output.close();

@@ -30,7 +30,7 @@ contains
     complex(kind=dp), dimension(2) :: w,k1,k2,k3,k4
     
     !read in input parameters
-    open(10,file='input1.dat',status='old',iostat=ierr)
+    open(10,file='../input1.dat',status='old',iostat=ierr)
     if (ierr/=0) stop "Error in opening input1.dat"
     read(10,*) start,finish
     read(10,*) n

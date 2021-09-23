@@ -1,5 +1,11 @@
+###Schottky Barriers
+
 MPhys project on Schottky Barriers, completed in 2016 at the University of York. 
 
+####C++ Update
+For a bit of fun I rewrote the project in C++. The new code seems to work, giving roughly the same result (seems to be affected by precision somewhat). The C++ version requires a C++20 capable compiler.
+
+###Fortran Instructions
 To compile:
 
    For TEST run:

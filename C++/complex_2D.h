@@ -28,10 +28,12 @@ struct complex_2D{
    complex_2D& operator+=(const complex_2D& p){
       this->fisrt  += p.first;
       this->second += p.second;
+      return *this;
    }
    complex_2D& operator-=(const complex_2D& p){
       this->first  -= p.first;
       this->second -= p.second;
+      return *this;
    }
 
 };
